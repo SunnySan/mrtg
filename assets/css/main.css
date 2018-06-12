@@ -1073,9 +1073,8 @@
 
 	body {
 		font-size: 13.5pt;
-		font-family: sans-serif;
 		background-color: #e3e9dc;
-		font-family: 'Ubuntu Condensed', sans-serif;
+		font-family: 'Ubuntu Condensed', sans-serif, 微軟正黑體;
 		color: #878e83;
 		letter-spacing: -1px;
 	}
