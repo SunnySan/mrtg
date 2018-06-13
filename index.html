@@ -14,6 +14,7 @@
 		<!--[if lte IE 8]><script src="assets/js/ie/html5shiv.js"></script><![endif]-->
 		<link rel="stylesheet" href="assets/css/main.css" />
 		<!--[if lte IE 9]><link rel="stylesheet" href="assets/css/ie9.css" /><![endif]-->
+		<link rel="stylesheet" href="css/jquery-ui.min.css" type="text/css" />
 	</head>
 	<body>
 		<div id="page-wrapper">
@@ -24,9 +25,6 @@
 
 							<header id="header">
 								<h1><a href="index.html" id="logo">MRTG</a></h1>
-								<nav id="nav">
-									<a href="logout.html">登出</a>
-								</nav>
 							</header>
 
 						</div>
@@ -40,15 +38,17 @@
 
 							<section class="middle-content" style="text-align:center;">
 								<h2>用戶登入</h2>
-								<div>
-									<label>帳號：&nbsp;</label>
-									<input type="text" class="form-control" id="User_ID" value="">
-								</div>
-								<div style="margin-top:10px;">
-									<label>密碼：&nbsp;</label>
-									<input type="password" class="form-control" id="User_Password" value="">
-								</div>
-								<div class="button" style="margin-top:20px;">登入</div>
+								<form id="frmMain" name="frmMain" action="#" method="post">
+									<div>
+										<label>帳號：&nbsp;</label>
+										<input type="text" class="form-control" id="User_ID" value="" maxlength="20">
+									</div>
+									<div style="margin-top:10px;">
+										<label>密碼：&nbsp;</label>
+										<input type="password" class="form-control" id="User_Password" value="" maxlength="20">
+									</div>
+									<div class="button" style="margin-top:20px;" onclick="doLogin();">登入</div>
+								</form>
 							</section>
 
 						</div>
@@ -81,3 +81,50 @@
 
 	</body>
 </html>
+
+<script type="text/javascript" src="js/jquery-ui.min.js"></script>
+<script type="text/javascript" src="js/util.js"></script>
+<script type="text/javascript" src="js/jquery.blockUI.js"></script>
+
+<script>
+	$(function () {
+		//$('#User_ID').focus();
+		$("#frmMain").keypress(function(event) {
+			if (event.which == 13) {
+				event.preventDefault();
+				doLogin();
+			}
+		});
+				
+	});
+
+
+	function doLogin(){
+		event.preventDefault();
+		var uid = $('#User_ID').val();
+		var upassword = $('#User_Password').val();
+		if (beEmpty(uid) || beEmpty(upassword)){
+				msgBox('請輸入帳號密碼!');
+				return false;
+		}
+
+		var sData = "";
+		sData += "uid=" + uid;
+		sData += "&upassword=" + upassword;
+
+		getDataFromServer("ajaxDoLogin.jsp", sData, "json", function(data){
+			if (!data.resultCode || !data.resultText){
+				msgBox("無法取得登入結果");
+				return;
+			}else{
+				if (data.resultCode=="00000"){
+					location.href = "mrtg.html";
+				}else{
+					msgBox("登入失敗：" + data.resultText);
+				}
+			}
+
+		});	//getDataFromServer("xxx.jsp", sData, "json", function(data){
+	}	//function doLogin(){
+
+</script>

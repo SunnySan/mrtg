@@ -14,6 +14,13 @@
 		<!--[if lte IE 8]><script src="assets/js/ie/html5shiv.js"></script><![endif]-->
 		<link rel="stylesheet" href="assets/css/main.css" />
 		<!--[if lte IE 9]><link rel="stylesheet" href="assets/css/ie9.css" /><![endif]-->
+		<link rel="stylesheet" href="css/jquery-ui.min.css" type="text/css" />
+
+	    <!-- Bootstrap Core CSS -->
+	    <link href="css/bootstrap.min.css" rel="stylesheet" type="text/css">
+
+		<link rel="stylesheet" href="css/footable.core.min.css" type="text/css" /><!--處理table的RWD/sorting/filtering，參考網頁：https://github.com/bradvin/FooTable -->
+		<link rel="stylesheet" href="css/footable.standalone.min.css" type="text/css" /><!--處理table的RWD/sorting/filtering，參考網頁：https://github.com/bradvin/FooTable -->
 	</head>
 	<body>
 		<div id="page-wrapper">
@@ -23,9 +30,9 @@
 						<div class="12u">
 
 							<header id="header">
-								<h1><a href="index.html" id="logo">MRTG</a></h1>
+								<h1 style="margin-top:0px;margin-bottom:0px;"><a href="index.html" id="logo">MRTG</a></h1>
 								<nav id="nav">
-									<a href="logout.html">登出</a>
+									<a href="#" onclick="doLogout();">登出</a>
 								</nav>
 							</header>
 
@@ -33,138 +40,34 @@
 					</div>
 				</div>
 			</div>
-			<div id="banner-wrapper">
-				<div class="container">
-
-					<div id="banner">
-						<h2>Put something cool here!</h2>
-						<span>And put something almost as cool here, but a bit longer ...</span>
-					</div>
-
-				</div>
-			</div>
 			<div id="main">
 				<div class="container">
 					<div class="row main-row">
-						<div class="4u 12u(mobile)">
+						<div class="12u 12u(mobile) important(mobile)" style="padding-top:0px;">
 
-							<section>
-								<h2>Welcome to Minimaxing!</h2>
-								<p>This is <strong>Minimaxing</strong>, a fully responsive HTML5 site template designed by <a href="http://twitter.com/ajlkn">AJ</a> and released for free by <a href="http://html5up.net">HTML5 UP</a>. It features
-								a simple, lightweight design, solid HTML5 and CSS3 code, and full responsive support for desktop, tablet, and mobile displays.</p>
-								<footer class="controls">
-									<a href="http://html5up.net" class="button">More cool designs ...</a>
-								</footer>
+							<section class="middle-content" style="text-align:center;">
+								<h2 id="listTitle">MRTG列表</h2>
+									<table id="tblResult" class="with-border footable" data-page-size="50" data-limit-navigation="5" style="text-shadow:none;">
+										<thead>
+											<tr>
+												<th data-class="expand">縣市</th>
+												<th data-hide="phone">區域</th>
+												<th>站點</th>
+												<th>頻寬</th>
+												<th>ISP</th>
+												<th>URL</th>
+											</tr>
+										</thead>
+										<tbody></tbody>
+										<tfoot>
+											<tr>
+												<td colspan="12" class="text-center">
+													<ul class="pagination pagination-centered">
+												</td>
+											</tr>
+										</tfoot>
+									</table>
 							</section>
-
-						</div>
-						<div class="4u 12u(mobile)">
-
-							<section>
-								<h2>Who are you guys?</h2>
-								<ul class="small-image-list">
-									<li>
-										<a href="#"><img src="images/pic2.jpg" alt="" class="left" /></a>
-										<h4>Jane Anderson</h4>
-										<p>Varius nibh. Suspendisse vitae magna eget et amet mollis justo facilisis amet quis.</p>
-									</li>
-									<li>
-										<a href="#"><img src="images/pic1.jpg" alt="" class="left" /></a>
-										<h4>James Doe</h4>
-										<p>Vitae magna eget odio amet mollis justo facilisis amet quis. Sed sagittis consequat.</p>
-									</li>
-								</ul>
-							</section>
-
-						</div>
-						<div class="4u 12u(mobile)">
-
-							<section>
-								<h2>How about some links?</h2>
-								<div>
-									<div class="row">
-										<div class="6u 12u(mobile)">
-											<ul class="link-list">
-												<li><a href="#">Sed neque nisi consequat</a></li>
-												<li><a href="#">Dapibus sed mattis blandit</a></li>
-												<li><a href="#">Quis accumsan lorem</a></li>
-												<li><a href="#">Suspendisse varius ipsum</a></li>
-												<li><a href="#">Eget et amet consequat</a></li>
-											</ul>
-										</div>
-										<div class="6u 12u(mobile)">
-											<ul class="link-list">
-												<li><a href="#">Quis accumsan lorem</a></li>
-												<li><a href="#">Sed neque nisi consequat</a></li>
-												<li><a href="#">Eget et amet consequat</a></li>
-												<li><a href="#">Dapibus sed mattis blandit</a></li>
-												<li><a href="#">Vitae magna sed dolore</a></li>
-											</ul>
-										</div>
-									</div>
-								</div>
-							</section>
-
-						</div>
-					</div>
-					<div class="row main-row">
-						<div class="6u 12u(mobile)">
-
-							<section>
-								<h2>An assortment of pictures and text</h2>
-								<p>Duis neque nisi, dapibus sed mattis quis, rutrum et accumsan.
-								Suspendisse nibh. Suspendisse vitae magna eget odio amet mollis
-								justo facilisis quis. Sed sagittis mauris amet tellus gravida
-								lorem ipsum dolor sit amet consequat blandit lorem ipsum dolor
-								sit amet consequat sed dolore.</p>
-								<ul class="big-image-list">
-									<li>
-										<a href="#"><img src="images/pic3.jpg" alt="" class="left" /></a>
-										<h3>Magna Gravida Dolore</h3>
-										<p>Varius nibh. Suspendisse vitae magna eget et amet mollis justo
-										facilisis amet quis consectetur in, sollicitudin vitae justo. Cras
-										Maecenas eu arcu purus, phasellus fermentum elit.</p>
-									</li>
-									<li>
-										<a href="#"><img src="images/pic4.jpg" alt="" class="left" /></a>
-										<h3>Magna Gravida Dolore</h3>
-										<p>Varius nibh. Suspendisse vitae magna eget et amet mollis justo
-										facilisis amet quis consectetur in, sollicitudin vitae justo. Cras
-										Maecenas eu arcu purus, phasellus fermentum elit.</p>
-									</li>
-									<li>
-										<a href="#"><img src="images/pic5.jpg" alt="" class="left" /></a>
-										<h3>Magna Gravida Dolore</h3>
-										<p>Varius nibh. Suspendisse vitae magna eget et amet mollis justo
-										facilisis amet quis consectetur in, sollicitudin vitae justo. Cras
-										Maecenas eu arcu purus, phasellus fermentum elit.</p>
-									</li>
-								</ul>
-							</section>
-
-						</div>
-						<div class="6u 12u(mobile)">
-
-							<article class="blog-post">
-								<h2>Just another blog post</h2>
-								<a class="comments" href="#">33 comments</a>
-								<a href="#"><img src="images/pic6.jpg" alt="" class="top blog-post-image" /></a>
-								<h3>Magna Gravida Dolore</h3>
-								<p>Aenean non massa sapien. In hac habitasse platea dictumst.
-								Maecenas sodales purus et nulla sodales aliquam. Aenean ac
-								porttitor metus. In hac habitasse platea dictumst. Phasellus
-								blandit turpis in leo scelerisque mollis. Nulla venenatis
-								ipsum nec est porta rhoncus. Mauris sodales sed pharetra
-								nisi nec consectetur. Cras elit magna, hendrerit nec
-								consectetur in, sollicitudin vitae justo. Cras amet aliquet
-								Aliquam ligula turpis, feugiat id fermentum malesuada,
-								rutrum eget turpis. Mauris sodales sed pharetra nisi nec
-								consectetur. Cras elit magna, hendrerit nec consectetur
-								in sollicitudin vitae.</p>
-								<footer class="controls">
-									<a href="#" class="button">Continue Reading</a>
-								</footer>
-							</article>
 
 						</div>
 					</div>
@@ -173,73 +76,11 @@
 			<div id="footer-wrapper">
 				<div class="container">
 					<div class="row">
-						<div class="8u 12u(mobile)">
-
-							<section>
-								<h2>How about a truckload of links?</h2>
-								<div>
-									<div class="row">
-										<div class="3u 12u(mobile)">
-											<ul class="link-list">
-												<li><a href="#">Sed neque nisi consequat</a></li>
-												<li><a href="#">Dapibus sed mattis blandit</a></li>
-												<li><a href="#">Quis accumsan lorem</a></li>
-												<li><a href="#">Suspendisse varius ipsum</a></li>
-												<li><a href="#">Eget et amet consequat</a></li>
-											</ul>
-										</div>
-										<div class="3u 12u(mobile)">
-											<ul class="link-list">
-												<li><a href="#">Quis accumsan lorem</a></li>
-												<li><a href="#">Sed neque nisi consequat</a></li>
-												<li><a href="#">Eget et amet consequat</a></li>
-												<li><a href="#">Dapibus sed mattis blandit</a></li>
-												<li><a href="#">Vitae magna sed dolore</a></li>
-											</ul>
-										</div>
-										<div class="3u 12u(mobile)">
-											<ul class="link-list">
-												<li><a href="#">Sed neque nisi consequat</a></li>
-												<li><a href="#">Dapibus sed mattis blandit</a></li>
-												<li><a href="#">Quis accumsan lorem</a></li>
-												<li><a href="#">Suspendisse varius ipsum</a></li>
-												<li><a href="#">Eget et amet consequat</a></li>
-											</ul>
-										</div>
-										<div class="3u 12u(mobile)">
-											<ul class="link-list">
-												<li><a href="#">Quis accumsan lorem</a></li>
-												<li><a href="#">Sed neque nisi consequat</a></li>
-												<li><a href="#">Eget et amet consequat</a></li>
-												<li><a href="#">Dapibus sed mattis blandit</a></li>
-												<li><a href="#">Vitae magna sed dolore</a></li>
-											</ul>
-										</div>
-									</div>
-								</div>
-							</section>
-
-						</div>
-						<div class="4u 12u(mobile)">
-
-							<section>
-								<h2>Something of interest</h2>
-								<p>Duis neque nisi, dapibus sed mattis quis, rutrum accumsan sed.
-								Suspendisse eu varius nibh. Suspendisse vitae magna eget odio amet
-								mollis justo facilisis quis. Sed sagittis mauris amet tellus gravida
-								lorem ipsum dolor sit amet consequat blandit.</p>
-								<footer class="controls">
-									<a href="#" class="button">Oh, please continue ....</a>
-								</footer>
-							</section>
-
-						</div>
-					</div>
-					<div class="row">
 						<div class="12u">
 
 							<div id="copyright">
 								&copy; TIIS. All rights reserved. | Design: <a href="http://html5up.net" target="_blank">HTML5 UP</a>
+								<!-- 原始網頁： https://html5up.net/minimaxing -->
 							</div>
 
 						</div>
@@ -258,3 +99,83 @@
 
 	</body>
 </html>
+
+<script type="text/javascript" src="js/jquery-ui.min.js"></script>
+<script src="js/bootstrap.min.js"></script>
+<script type="text/javascript" src="js/util.js"></script>
+<script type="text/javascript" src="js/jquery.blockUI.js"></script>
+<script type="text/javascript" src="js/footable.all.min.js"></script><!--處理table的RWD/sorting/filtering，參考網頁：https://github.com/bradvin/FooTable -->
+<script type="text/javascript" src="js/ddtf.js"></script><!--Simple jQuery Dropdown Table Filter Plugin，參考網頁：https://www.jqueryscript.net/table/Simple-jQuery-Dropdown-Table-Filter-Plugin-ddtf-js.html -->
+
+<script>
+	$(function () {
+
+		//$('#tblResult').footable();
+		//$('#tblResult').ddTableFilter();
+		getMRTGList();
+	});
+</script>
+
+<script>
+	
+	function getMRTGList(){
+		var sData = "";
+		var s = "";
+		var tmp = "";
+		var iCount = 0;
+
+		getDataFromServer("ajaxGetMrtgList.jsp", sData, "json", function(data){
+			if (!data.resultCode || !data.resultText){
+				msgBox("無法取得作業結果!");
+				return;
+			}else{
+				if (data.resultCode=="00000"){
+					s = "";
+					iCount = 0;
+					$.each( data.records, function(i, r) {
+						iCount++;
+						tmp = "";
+						s = "<tr>";
+						s += "<td>" + (beEmpty(r.City)?"":r.City) + "</td>";
+						s += "<td>" + (beEmpty(r.Area)?"":r.Area) + "</td>";
+						s += "<td>" + (beEmpty(r.Office)?"":r.Office) + "</td>";
+						s += "<td>" + (beEmpty(r.Bandwidth)?"":r.Bandwidth) + "</td>";
+						s += "<td>" + (beEmpty(r.ISP)?"":r.ISP) + "</td>";
+						if (beEmpty(r.URL)){
+							s += "<td></td>";
+						}else{
+							s += "<td><a href='" + r.URL + "' target='_blank'>點我</a></td>";
+						}
+						s += "</tr>";
+						$('#tblResult tbody').append(s);
+					});	//$.each( data.orders, function(i, r) {
+					//$('#tblResult tbody').trigger('footable_redraw');
+					$('#tblResult').ddTableFilter();
+					tmp = $('#listTitle').text() + "&nbsp;(共&nbsp;" + iCount + "&nbsp;筆資料)";
+					$('#listTitle').html(tmp);
+				}else{
+					msgBox("擷取資料失敗：<br>" + data.resultText);
+				}
+			}
+
+		});	//getDataFromServer("xxx.jsp", sData, "json", function(data){
+	}	//function getUserProfile(){
+
+	function doLogout(){
+		var sData = "";
+
+		getDataFromServer("ajaxDoLogout.jsp", sData, "json", function(data){
+			if (!data.resultCode || !data.resultText){
+				msgBox("無法取得作業結果!");
+				return;
+			}else{
+				if (data.resultCode=="00000"){
+					location.href = "index.html";
+				}else{
+					msgBox("登出失敗：<br>" + data.resultText);
+				}
+			}
+
+		});	//getDataFromServer("xxx.jsp", sData, "json", function(data){
+	}
+</script>
