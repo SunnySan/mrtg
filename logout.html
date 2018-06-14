@@ -31,9 +31,6 @@
 
 							<header id="header">
 								<h1 style="margin-top:0px;margin-bottom:0px;"><a href="index.html" id="logo">MRTG</a></h1>
-								<nav id="nav">
-									<a href="logout.html" onclick="doLogout();">登出</a>
-								</nav>
 							</header>
 
 						</div>
@@ -46,27 +43,7 @@
 						<div class="12u 12u(mobile) important(mobile)" style="padding-top:0px;">
 
 							<section class="middle-content" style="text-align:center;">
-								<h2 id="listTitle">MRTG列表</h2>
-								<table id="tblResult" class="with-border footable" data-page-size="50" data-limit-navigation="5" style="text-shadow:none;">
-									<thead>
-										<tr>
-											<th data-class="expand">縣市</th>
-											<th data-hide="phone">區域</th>
-											<th>站點</th>
-											<!--<th data-hide="phone">頻寬</th>
-											<th data-hide="phone">ISP</th>-->
-											<th>URL</th>
-										</tr>
-									</thead>
-									<tbody></tbody>
-									<tfoot>
-										<tr>
-											<td colspan="12" class="text-center">
-												<ul class="pagination pagination-centered">
-											</td>
-										</tr>
-									</tfoot>
-								</table>
+								<h2 id="listTitle">登出中...</h2>
 							</section>
 
 						</div>
@@ -109,60 +86,12 @@
 
 <script>
 	$(function () {
-
-		//$('#tblResult').footable();
-		//$('#tblResult').ddTableFilter();
-		getMRTGList();
+		doLogout();
 	});
 </script>
 
 <script>
-	
-	function getMRTGList(){
-		var sData = "";
-		var s = "";
-		var tmp = "";
-		var iCount = 0;
-
-		getDataFromServer("ajaxGetMrtgList.jsp", sData, "json", function(data){
-			if (!data.resultCode || !data.resultText){
-				msgBox("無法取得作業結果!");
-				return;
-			}else{
-				if (data.resultCode=="00000"){
-					s = "";
-					iCount = 0;
-					$.each( data.records, function(i, r) {
-						iCount++;
-						tmp = "";
-						s = "<tr>";
-						s += "<td>" + (beEmpty(r.City)?"":r.City) + "</td>";
-						s += "<td>" + (beEmpty(r.Area)?"":r.Area) + "</td>";
-						s += "<td>" + (beEmpty(r.Office)?"":r.Office) + "</td>";
-						//s += "<td>" + (beEmpty(r.Bandwidth)?"":r.Bandwidth) + "</td>";
-						//s += "<td>" + (beEmpty(r.ISP)?"":r.ISP) + "</td>";
-						if (beEmpty(r.URL)){
-							s += "<td></td>";
-						}else{
-							s += "<td><a href='" + r.URL + "' target='_blank'>點我</a></td>";
-						}
-						s += "</tr>";
-						$('#tblResult tbody').append(s);
-					});	//$.each( data.orders, function(i, r) {
-					//$('#tblResult tbody').trigger('footable_redraw');
-					$('#tblResult').ddTableFilter();
-					tmp = $('#listTitle').text() + "&nbsp;(共&nbsp;" + iCount + "&nbsp;筆資料)";
-					$('#listTitle').html(tmp);
-				}else{
-					msgBox("擷取資料失敗：<br>" + data.resultText);
-				}
-			}
-
-		});	//getDataFromServer("xxx.jsp", sData, "json", function(data){
-	}	//function getUserProfile(){
-
 	function doLogout(){
-		event.preventDefault();
 		var sData = "";
 
 		getDataFromServer("ajaxDoLogout.jsp", sData, "json", function(data){
